@@ -4,7 +4,7 @@ use Encode;
 use Data::Dumper;
 
 my $crud_link = '/home/programmer2/data/perl-web-crud/crud.pl';
-my $json_link = '/home/programmer2/data/perl-web-crud/user.json';
+my $json_link = '/home/programmer2/data/perl-web-crud/user1.json';
 
 get '/' => sub {
     my $c = shift;
@@ -60,6 +60,7 @@ get '/get_json' => sub {
     my $c = shift;
     my $json_path = $json_link;
     if (-e $json_path) {
+         $c->res->headers->access_control_allow_origin('*');
          $c->reply->file($json_path);
     } else {
          $c->render(text => 'Файл не найден', status => 404);
