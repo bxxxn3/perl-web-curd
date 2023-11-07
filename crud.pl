@@ -89,20 +89,20 @@ sub load_db {
 #     close $file;
 # }
 
-
-
 sub get_json {
-    my %json_gay;
-    open my $file_gay, '>', 'user_gays.json' or die "Не удалось открыть файл: $!";
-    foreach $id (keys %user){
-        %json_gay = (
-            id      =>      $user{$id}{id},
-            name    =>      $user{$id}{name},
-            age     =>      $user{$id}{age});
-            my $json1 = to_json(\%json_gay);
-            print $file_gay $json1;
-            }
-    close $file_gay;
+    my @jsonObjects;
+    foreach my $id (keys %user) {
+        my %json = (
+            id   => $user{$id}{id},
+            name => $user{$id}{name},
+            age  => $user{$id}{age}
+        );
+        push @jsonObjects, \%json;
+    }
+
+    open my $file, '>', 'user1.json' or die "Не удалось открыть файл: $!";
+    print $file to_json(\@jsonObjects);
+    close $file;
 }
 
 sub add_user {

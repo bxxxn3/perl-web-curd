@@ -3,8 +3,8 @@ use Storable;
 use Encode;
 use Data::Dumper;
 
-my $crud_link = '~/data/www/crud.pl';
-my $json_link = '/home/programmer2/data/www/user.json';
+my $crud_link = '/home/programmer2/data/perl-web-crud/crud.pl';
+my $json_link = '/home/programmer2/data/perl-web-crud/user.json';
 
 get '/' => sub {
     my $c = shift;
