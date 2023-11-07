@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    font-family: Consolas, monospace
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.h1 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0.2%
+}
+
+.h2 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0.2%
+}
+
+.h3 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0.2%
+}
+
+.h4 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0.2%
+}
+
+.h5 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0.2%
+}
+
+.h-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}

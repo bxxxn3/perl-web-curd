@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>crud web mojo</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script defer src="js/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="h1">
+            <div class="h-center">
+                <h1>Добавить запись</h1>
+                <form action="/add_user" method="POST" onsubmit="return confirm('Действительно добавить запись?');">
+                    <label for="user_name">Имя:</label><br>
+                    <input type="text" name="user_name" placeholder="Введите имя" required><br>
+                    <label for="age">Возраст:</label><br>
+                    <input type="number" name="user_age" placeholder="Введите возраст" required><br>
+                    <button type="submit">Добавить запись!</button>
+                </form>
+            </div>
+        </div>
+        <div class="h2">
+            <div class="h-center">
+                <h1>Удалить запись</h1>
+                <form action="/delete_user" method="POST" onsubmit="return confirm('Действительно удалить запись?');">
+                    <label for="user_id">id записи:</label><br>
+                    <input type="text" name="user_id" placeholder="Введите id" required><br>
+                    <button type="submit">Удалить запись!</button>
+                </form>
+            </div>
+        </div>
+        <div class="h3">
+            <div class="h-center">
+                <h1>Обновить запись</h1>
+                <form action="/update_user" method="POST" onsubmit="return confirm('Действительно обновить запись?');">
+                    <label for="user_name">Имя:</label><br>
+                    <input type="text" name="user_name" placeholder="Введите имя" required><br>
+                    <label for="user_id">id записи:</label><br>
+                    <input type="number" name="user_id" placeholder="Введите id" required><br>
+                    <button type="submit">Обновить запись!</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="h4">
+            <div class="h-center">
+                <h1>Сортированный вывод</h1>
+                <form action="/get_user" method="POST">
+                    <label for="data">Введите данные:</label><br>
+                    <input list="sort_field" name="sort_field" placeholder="Выберите поле сортировки"><br>
+                    <datalist id="sort_field">
+                        <option value="id">
+                        <option value="name">
+                        <option value="age">
+                    </datalist>
+
+                    <input list="sort_type" name="sort_type" placeholder="Выберите тип сортировки" required><br>
+                    <datalist id="sort_type">
+                        <option value="asc">
+                        <option value="desc">
+                    </datalist>
+                    <button type="submit">Отправить запрос!</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="h5">
+            <div class="h-center">
+                <h1>help</h1>
+                <form class="content" action="/help" method="GET">
+                    <button type="submit">Получить помощь!</button>
+                </form>
+            </div>
+        </div>
+        <div class="h6">
+            <div class="h-center">
+                <h1>help</h1>
+                <form class="content" action="/get_json" method="GET">
+                    <button type="submit">открыть json</button>
+                </form>
+            </div>
+        </div>
+
+</html>
