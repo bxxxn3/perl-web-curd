@@ -3,12 +3,19 @@ use Storable;
 use Encode;
 use Data::Dumper;
 
-my $crud_link = '/home/programmer2/data/perl-web-crud/crud.pl';
-my $json_link = '/home/programmer2/data/perl-web-crud/user1.json';
+
+
+my $global_link =$0;
+$global_link =~ s#(\w|\.)+$##;
+my $crud_link = $global_link.'crud.pl';
+my $json_link = $global_link.'user1.json';
+# warn Dumper($crud_link);
+# warn Dumper($json_link);
+
 
 get '/' => sub {
     my $c = shift;
-    warn Dumper(app->static);
+    
     $c->reply->static('index.html');
 };
 
@@ -58,10 +65,11 @@ post '/get_user' => sub {
 
 get '/get_json' => sub {
     my $c = shift;
-    my $json_path = $json_link;
-    if (-e $json_path) {
+    my $aboba = '"'.$json_link.'"';
+    warn Dumper($aboba);
+    if (-e $json_link) {
          $c->res->headers->access_control_allow_origin('*');
-         $c->reply->file($json_path);
+         $c->reply->file($json_link);
     } else {
          $c->render(text => 'Файл не найден', status => 404);
     }
