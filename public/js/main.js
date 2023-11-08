@@ -1,12 +1,7 @@
 async function loadJson() {
-
-
-  const response = await fetch('http://127.0.0.1:3000/get_json?');
-  const data = await response.json();
-  console.log(data);
-  console.log(typeof jsonData)
-  return data;
-
+  const response = fetch('http://127.0.0.1:3000/get_json?')
+    .then((data) => data.json()
+      .catch(err => console.log('Error: ', err))
+    );
+  return response;
 }
-
-var jsonData = loadJson();
