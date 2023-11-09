@@ -15,7 +15,11 @@ my $json_link = $global_link.'user1.json';
 
 get '/' => sub {
     my $c = shift;
-    
+    $c->redirect_to('/index');
+};
+
+get '/index' => sub {
+    my $c = shift;
     $c->reply->static('index.html');
 };
 
@@ -25,9 +29,15 @@ post '/add_user' => sub {
     my $user_age = $c->param('user_age');
     my $command = "$crud_link --add --name=\"$user_name\" --age $user_age ";
     my $result = qx($command);
-    $result = decode('utf-8', $result);
-    $result =~ s/\n/<br>/g;
-    $c->render(text => $result);
+    
+    if ($result > 0) {
+        # $c->reply->static('index.html');
+        $c->redirect_to('/index');
+    }   
+    else {
+        $c->render(text => 'Запись не создана. Введите корректный возраст', status => 400);
+    }
+    
 };
 
 post '/delete_user' => sub {
@@ -51,6 +61,7 @@ post '/update_user' => sub {
     $c->render(text => $result );
 };
 
+
 post '/get_user' => sub {
     my $c = shift;
     my $sort_field = $c->param('sort_field');
@@ -69,6 +80,7 @@ get '/get_json' => sub {
     warn Dumper($aboba);
     if (-e $json_link) {
          $c->res->headers->access_control_allow_origin('*');
+         $c->res->headers->cache_control('private, max-age=1, no-cache');
          $c->reply->file($json_link);
     } else {
          $c->render(text => 'Файл не найден', status => 404);

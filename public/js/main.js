@@ -5,3 +5,16 @@ async function loadJson() {
     );
   return response;
 }
+
+
+
+async function reloadTable() {
+  $(document).ready(async function () {
+    var list = await loadJson();
+    console.log('afaffa');
+    $('#firsttable').footable({
+      rows: list
+    });
+  });
+}
+

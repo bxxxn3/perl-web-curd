@@ -31,7 +31,7 @@
                     <input type="text" name="user_name" placeholder="Введите имя" required><br>
                     <label for="age">Возраст:</label><br>
                     <input type="number" name="user_age" placeholder="Введите возраст" required><br>
-                    <button type="submit">Добавить запись!</button>
+                    <button type="submit">Добавить запись! </button>
                 </form>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     <input type="text" name="user_name" placeholder="Введите имя" required><br>
                     <label for="user_id">id записи:</label><br>
                     <input type="number" name="user_id" placeholder="Введите id" required><br>
-                    <button type="submit">Обновить запись!</button>
+                    <button type="submit">Обновить запись! </button>
                 </form>
             </div>
         </div>
@@ -60,12 +60,12 @@
             </div>
         </div>
     </div>
-    <table id="firsttable" class="table footable " data-paging="true" data-sorting="true">
+    <table id="firsttable" class="table footable " data-sorting="true" data-paging="true" data-filtering="true">
         <thead>
             <tr>
-                <th data-name="id" data-type="number">id </th>
-                <th data-name="name">name </th>
-                <th data-name="age">age</th>
+                <th data-name="id">Id </th>
+                <th data-name="name">Name </th>
+                <td data-type="number" data-name="age">Age</td>
             </tr>
         </thead>
         <tbody>
@@ -73,13 +73,7 @@
     </table>
 </body>
 <script>
-    $(document).ready(async function () {
-        var list = await loadJson();
-        $('#firsttable').footable({
-            colums: list,
-            rows: list
-        });
-    });
+    reloadTable();
 </script>
 
 </html>
