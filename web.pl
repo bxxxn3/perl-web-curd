@@ -2,6 +2,10 @@ use Mojolicious::Lite;
 use Storable;
 use Encode;
 use Data::Dumper;
+use FindBin;
+use lib "$FindBin::Bin/";
+
+use Crud;
 
 
 
@@ -23,13 +27,13 @@ get '/index' => sub {
     $c->reply->static('index.html');
 };
 
+
+
 post '/add_user' => sub {
     my $c = shift;
     my $user_name = $c->param('user_name');
     my $user_age = $c->param('user_age');
-    my $command = "$crud_link --add --name=\"$user_name\" --age $user_age ";
-    my $result = qx($command);
-    
+    my $result = Crud::add_user($user_name, $user_age);
     if ($result > 0) {
         # $c->reply->static('index.html');
         $c->redirect_to('/index');
@@ -43,12 +47,15 @@ post '/add_user' => sub {
 post '/delete_user' => sub {
     my $c = shift;
     my $user_id = $c->param('user_id');
-    my $command = "$crud_link --del --id=$user_id ";
-    my $result = qx($command);
-    $result = decode('utf-8', $result);
-    $result =~ s/\n/<br>/g;
-    $c->render(text => $result );
+    my $result = 
+    if ($result > 0){
+        $c->redirect_to('/index')
+    }
+    else{
+        $c->render(text => ' Введите корректныe данные', status => 400);
+    }
 };
+
 
 post '/update_user' => sub {
     my $c = shift;

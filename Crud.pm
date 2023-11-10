@@ -13,7 +13,23 @@ my %user;
 my $id = 1;
 my $sort_param;
 
+sub new{
+    my $class_name = $_[0];
+    return bless({
+        id => 0,
+        age => 0,
+        name => '',
+    }, $class_name);
+ 
+}
+
 create_or_load_db();
+
+
+sub update_user {
+    my $self = $_[0];
+    $self->{name} = $name;
+}
 
 sub add_user {
     my $id = 0;
@@ -37,20 +53,20 @@ sub delete_user {
     if (exists $user{$id}) {
         delete $user{$id};
         save_db();
-        print "Запись удалена.\n";
+        return 1;
     } else {
-        print "Запись не найдена\n";
+        return 0;
     }
 }
 
-sub update_user {
+sub update_name {
     my ($id, $name) = @_;
     if (exists $user{$id}) {
         $user{$id}->{name} = $name;
         save_db();
-        print "\n";
+        return 1;;
     } else {
-        print "Запись не найдена\n";
+        return 0;
     }
 }
 

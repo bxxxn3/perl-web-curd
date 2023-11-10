@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-
+use Data::Dumper;
 use FindBin;
 
 use Getopt::Long;
@@ -11,7 +11,17 @@ use lib "$FindBin::Bin/";
 
 use Crud;
 
-my ($arg, $id, $name, $age, $sort_param, $data );
+my $crud = Crud->new();
+$crud->update_user();
+
+
+warn Dumper($crud);
+
+
+
+exit;
+
+my ($arg, $id, $user_name, $user_age, $sort_param, $data );
 
 GetOptions(
     'add'           => sub { $arg = 'add' },
@@ -20,18 +30,18 @@ GetOptions(
     'output'        => sub { $arg = 'output' },
     'help'          => sub { $arg = 'help' },
     'sort_param=s'  => \$sort_param,
-    "name=s"        => \$name,
-    "age=i"         => \$age,
+    "name=s"        => \$user_name,
+    "age=i"         => \$user_age,
     "id=i"          => \$id,
 ) or die "Недопустимые параметры командной строки\n";
 
 my $result = '';
 if ($arg eq 'add') {
-    $result = Crud::add_user($name, $age);
+    $result = Crud::add_user($user_name, $user_age);
 } elsif ($arg eq 'del') {
     $result = Crud::delete_user($id);
 } elsif ($arg eq 'upd') {
-    $result = Crud::update_user($id, $name);
+    $result = Crud::update_user($id, $user_name);
 } elsif ($arg eq 'output') {
     $result = Crud::output_user($sort_param);
 } elsif ($arg eq 'help') {
