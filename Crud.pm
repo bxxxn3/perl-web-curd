@@ -14,7 +14,7 @@ my $id = 1;
 my $sort_param;
 
 sub new{
-    my $class_name = $_[0];
+    my $class_name = shift;
     return bless({
         id => 0,
         age => 0,
@@ -25,15 +25,9 @@ sub new{
 
 create_or_load_db();
 
-
-sub update_user {
-    my $self = $_[0];
-    $self->{name} = $name;
-}
-
-sub add_user {
+sub create_user {
     my $id = 0;
-    my ($name, $age, $rights, $settings) = @_;
+    my ($name, $age) = @_;
     if (0 < $age && $age <= 150) {
         $id = generate_id();
         $id++;
@@ -49,26 +43,30 @@ sub add_user {
     }
 }
 
-sub delete_user {
-    if (exists $user{$id}) {
-        delete $user{$id};
-        save_db();
-        return 1;
-    } else {
-        return 0;
-    }
+sub create_user {
+    my ($id, $name, $age) = @_;
+    my $user = User->new();
+    $user->{id}=$id;
+    $user->{name}=$name;
+    $user->{age}=$age;
+    
 }
 
-sub update_name {
-    my ($id, $name) = @_;
-    if (exists $user{$id}) {
-        $user{$id}->{name} = $name;
-        save_db();
-        return 1;;
-    } else {
-        return 0;
-    }
+
+sub update_user {
+   my $user = User->new();
+   $user->get_by_id(shift);
+   $user->set_name(shift);
 }
+ 
+
+sub delete_user {
+    my $user = User->new();
+    $user->get_by_id(shift);
+    return $user->delete();
+}
+
+
 
 sub output_user {
     given ($sort_param) {
