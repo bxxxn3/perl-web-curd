@@ -11,15 +11,6 @@ use lib "$FindBin::Bin/";
 
 use Crud;
 
-my $crud = Crud->new();
-$crud->update_user();
-
-
-warn Dumper($crud);
-
-
-
-exit;
 
 my ($arg, $id, $user_name, $user_age, $sort_param, $data );
 
@@ -37,13 +28,13 @@ GetOptions(
 
 my $result = '';
 if ($arg eq 'add') {
-    $result = Crud::add_user($user_name, $user_age);
+    $result = Crud::create_user($user_name, $user_age);
 } elsif ($arg eq 'del') {
     $result = Crud::delete_user($id);
 } elsif ($arg eq 'upd') {
     $result = Crud::update_user($id, $user_name);
 } elsif ($arg eq 'output') {
-    $result = Crud::output_user($sort_param);
+    $result = Crud::read_user($sort_param);
 } elsif ($arg eq 'help') {
    $result = help();
 } else {
