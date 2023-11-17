@@ -8,6 +8,7 @@ use FindBin;
 use Getopt::Long;
 
 use lib "$FindBin::Bin/";
+use User;
 
 use Crud;
 

@@ -26,12 +26,7 @@ sub new{
 
 sub create_user {
     my ($name, $age) = @_;
-    my $user = User->new();
-    $user->{id}= 233;
-    $user->{name}=$name;
-    $user->{age}=$age;
-    warn Dumper($user);
-    return $user->write_db();
+    my $user = User->save();
 }
 
 
